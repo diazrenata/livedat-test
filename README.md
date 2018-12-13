@@ -198,11 +198,9 @@ it to change most of the core things in your repositories.
     Running `datascript.R` in this example will flag an error in the periods:
 
     ```
-    "Unlikely period #:"
-    period BA DM DO DS NA. OL OT PB PE PF PH PI PL PM PP RF RM RO SF SH
-    4620  0 44 24  0   5  1 11  5 10  1  0  1  0 92  0  1  1  0  0
-    SO
-    0
+    [1] "Unlikely period #:"
+  period BA DM DO DS NA. OL OT PB PE PF PH PI PL PM PP RF RM RO SF SH SO
+1   4620  0 44 24  0   5  1 11  5 10  1  1  0  1  0 92  0  1  1  0  0  0
     ```
 
     Uncomment and run the following line in `datascript.R` to fix the error:
