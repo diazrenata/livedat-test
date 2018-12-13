@@ -213,8 +213,10 @@ it to change most of the core things in your repositories.
 
     and proceed with `datascript.R` to append the new data to the main data file.
 
-4. Open a pull request to merge your branch into the master. This will trigger Travis to run the tests you added earlier.
+4. Commit and push these changes to your branch.
 
-5. If all the checks pass, merge your pull request into the master and delete the working branch.
+5. Open a pull request to merge your branch into the master. This will trigger Travis to run the tests you added earlier.
+
+6. If all the checks pass, merge your pull request into the master and delete the working branch.
 
 ## Some thoughts on security <a name="security"></a>
