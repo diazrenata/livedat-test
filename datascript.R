@@ -1,3 +1,5 @@
+library(dplyr)
+
 # Open new data file
 
 new_data <- read.csv('new-data/rodent_abundance_new.csv', 
