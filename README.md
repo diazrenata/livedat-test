@@ -53,9 +53,9 @@ https://github.com/new/import
 3. Login to Zenodo
 4. In the top right corner of the screen click the down arrow next to your email
    address and select "GitHub"
-   
+
    ![Screenshot of Zenodo main menu](screenshots/zenodo_menu.png)
-   
+
 5. Find your repository in the list and flip the switch to "On"
 
    ![Screenshot of Zenodo integration switch](screenshots/toggle_zenodo.png)
@@ -65,7 +65,7 @@ https://github.com/new/import
 1. Go to https://travis-ci.com/ and click the green button to sign up with GitHub
 
    ![Screenshot of initial Travis Signup](screenshots/travis_initial_signup.png)
-   
+
 2. Authorize Travis to access your GitHub account by clicking the green button
 
    ![Screenshot of Travis GitHub authorization ](screenshots/travis_initial_auth.png)
@@ -81,12 +81,12 @@ https://github.com/new/import
 
 5. Approve access to that repository by clicking the green `Approve & Install`
    button
-   
+
    ![Screenshot of approving repository access](screenshots/travis_approve_repo.png)
 
 6. You will be redirected to Travis. Click the `Sign in with GitHub` button and
    you're done.
-   
+
    ![Screenshot of signing back into Travis](screenshots/travis_final_signin.png)
 
 ## Give Travis access to update your data on GitHub <a name="travisaccess"></a>
@@ -148,22 +148,75 @@ it to change most of the core things in your repositories.
 
    ![Screenshot of add button on Travis](screenshots/travis_add_button.png)
 
-## Implement your data cleaning and manipulation steps <a name="datacleaning"></a>
+## Set up your data cleaning and manipulation steps <a name="datacleaning"></a>
 
 1. Add any packages that your data cleaning and manipulation requires to
    `p_load` function call in `install-packages.R`. Do not remove any of the
    packages that are already there.
-   
+
     ```
     # Install packages required for analysis
     # Add any packages required for you data cleaning and manipulation to the
     # `p_load` function call below
     # Do not remove the packages already listed here
     # they are important for running the livedat repository
-    
+
     pacman::p_load(git2r, httr, semver, yaml, dplyr)
     ```
 2. Modify `datascript.R` to the code you need for data cleaning and manipulation
+
+    For example, `datascript.R` in this template includes checks to make sure that (1) the column names for new data match the column names for existing data and (2) that the sampling period values for new data are valid. These are checks that will catch common errors before new data are added to the main data file.
 3. Commit and push these changes to your repository
+
+
+## Add your starting data
+
+1. Add the initial version of your data to the `data` folder.
+
+  For example, this template has a subset of the rodent abundance data from the Portal project (abundances until sampling period 450) in the `data` folder (`rodent_abundance.csv`)
+
+2. Commit and push these changes to your repository
+
+## Create tests
+
+1. Modify the .R scripts in the `testthat` folder to check that the data in your main `data` folder meets your quality checks.
+
+    For example, this template includes scripts to confirm that the data meets the same quality checks as above - namely, the column names are as expected (`testthat/test-colnames.R`), and the sampling period values are plausible (`testthat/test-periods.R`.)
+
+2. Commit and push these changes to your repository
+
+## Add new data (manually)
+
+1. Create a new branch off of the master branch for your repository.
+
+2.  Enter new data into a file in the `new-data` folder.
+
+    The `new-data/rodent_abundance_new.csv` file included in this template includes data with an error! Appending the new data to the old data without running checks will introduce an error to the main data file and cause the tests to fail.
+
+3. Run `datascript.R` to perform quality checks and correct the new data.
+
+    Running `datascript.R` in this example will flag an error in the periods:
+
+    ```
+    "Unlikely period #:"
+  period BA DM DO DS NA. OL OT PB PE PF PH PI PL PM PP RF RM RO SF SH
+1   4620  0 44 24  0   5  1 11  5 10  1  1  0  1  0 92  0  1  1  0  0
+  SO
+1  0
+```
+
+    Uncomment and run the following line in `datascript.R` to fix the error:
+
+    ```
+    # Fix the error in the periods
+
+    new_data[ which(new_data$period == 4620), 'period'] <- 462
+    ```
+
+    and proceed with `datascript.R` to append the new data to the main data file.
+
+4. Open a pull request to merge your branch into the master. This will trigger Travis to run the tests you added earlier.
+
+5. If all the checks pass, merge your pull request into the master and delete the working branch.
 
 ## Some thoughts on security <a name="security"></a>
