@@ -199,11 +199,11 @@ it to change most of the core things in your repositories.
 
     ```
     "Unlikely period #:"
-  period BA DM DO DS NA. OL OT PB PE PF PH PI PL PM PP RF RM RO SF SH
-1   4620  0 44 24  0   5  1 11  5 10  1  1  0  1  0 92  0  1  1  0  0
-  SO
-1  0
-```
+    period BA DM DO DS NA. OL OT PB PE PF PH PI PL PM PP RF RM RO SF SH
+    4620  0 44 24  0   5  1 11  5 10  1  0  1  0 92  0  1  1  0  0
+    SO
+    0
+    ```
 
     Uncomment and run the following line in `datascript.R` to fix the error:
 
