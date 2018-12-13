@@ -6,8 +6,8 @@ install:
   - Rscript install-packages.R
   
 script:
-  - Rscript datascript.R
-
+ - Rscript testthat.R
+ 
 after_success:
   - git checkout master
   - Rscript archive.R

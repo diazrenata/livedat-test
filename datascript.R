@@ -37,7 +37,7 @@ if(nrow(filter(new_data, period > max_period)) > 0) {
 
 # Fix the error in the periods
 
-new_data[ which(new_data$period == 4620), 'period'] <- 462
+# new_data[ which(new_data$period == 4620), 'period'] <- 462
 
 # Append data to old data file
 
