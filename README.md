@@ -173,7 +173,7 @@ it to change most of the core things in your repositories.
 
 1. Add the initial version of your data to the `data` folder.
 
-  For example, this template has a subset of the rodent abundance data from the Portal project (abundances until sampling period 450) in the `data` folder (`rodent_abundance.csv`)
+    For example, this template has a subset of the rodent abundance data from the Portal project (abundances until sampling period 450) in the `data` folder (`rodent_abundance.csv`)
 
 2. Commit and push these changes to your repository
 
